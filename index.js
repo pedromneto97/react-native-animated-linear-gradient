@@ -4,8 +4,6 @@ import { StyleSheet, StatusBar, Dimensions, View, Animated, Easing } from 'react
 import NativeLinearGradient from 'react-native-linear-gradient';
 import rgb2hex from 'rgb2hex';
 
-// const {height, width} = Dimensions.get('window');
-
 class LinearGradient extends Component {
   render() {
     const { color0, color1, children, points } = this.props;
@@ -13,7 +11,6 @@ class LinearGradient extends Component {
     const gEnd = points.end;
     return (
       <NativeLinearGradient
-        // colors={this.props.colors.map((c) => rgb2hex(c).hex)}
         colors={[color0, color1].map((c) => rgb2hex(c).hex)}
         start={gStart}
         end={gEnd}
@@ -24,8 +21,6 @@ class LinearGradient extends Component {
   }
 }
 Animated.LinearGradient = Animated.createAnimatedComponent(LinearGradient)
-Animated.useNativeDriver = true
-// Animated.NativeLinearGradient = Animated.createAnimatedComponent(NativeLinearGradient)
 
 export const presetColors = {
   instagram: [
@@ -84,7 +79,8 @@ class AnimatedGradient extends Component {
         return Animated.timing(animatedColor, {
           toValue: customColors.length,
           duration: customColors.length * speed,
-          easing: Easing.linear
+          easing: Easing.linear,
+          useNativeDriver: false,
         })
       })
     )
